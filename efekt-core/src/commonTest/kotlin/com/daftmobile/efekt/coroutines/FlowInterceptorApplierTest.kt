@@ -5,6 +5,7 @@ import dev.mokkery.every
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
 import dev.mokkery.verify
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
@@ -27,6 +28,6 @@ class FlowInterceptorApplierTest {
 
     @Test
     fun testReturnsInterceptedFlow() = runTest {
-        assertEquals(listOf("1", "2", "3"), interceptorApplier.applyInterceptor(flow, interceptor).toList())
+        interceptorApplier.applyInterceptor(flow, interceptor).toList() shouldBe listOf("1", "2", "3")
     }
 }

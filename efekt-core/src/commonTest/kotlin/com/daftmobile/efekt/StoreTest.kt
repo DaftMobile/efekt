@@ -9,6 +9,7 @@ import dev.mokkery.matcher.any
 import dev.mokkery.matcher.matching
 import dev.mokkery.mock
 import dev.mokkery.verify
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -44,9 +45,9 @@ class StoreTest {
     fun testDelegatesReducerStateUpdatesToStateFlow() = runTest {
         every { reducer(any(), any()) } calls  { (scope: ReducerScope<Int>) -> scope.state.value = 2 }
         store.state.test {
-            assertEquals(1, awaitItem())
+            awaitItem() shouldBe 1
             store.dispatch(Action("A"))
-            assertEquals(2, awaitItem())
+            awaitItem() shouldBe 2
         }
     }
 

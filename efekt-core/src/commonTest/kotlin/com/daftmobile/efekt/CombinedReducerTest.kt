@@ -5,6 +5,7 @@ import dev.mokkery.every
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
 import dev.mokkery.verify
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -35,11 +36,8 @@ class CombineReducerTest {
     @Test
     fun testCombinedReducerShouldCombineEffects() {
         combinedReducer.invoke(scope, Action("A"))
-        assertEquals(
-            expected = listOf(Action("Effect1"), Action("Effect2"), Action("Effect3"))
-                .map { it.toEffect() },
-            actual = scope.effects
-        )
+        scope.effects shouldBe listOf(Action("Effect1"), Action("Effect2"), Action("Effect3"))
+            .map { it.toEffect() }
     }
 
     @Test

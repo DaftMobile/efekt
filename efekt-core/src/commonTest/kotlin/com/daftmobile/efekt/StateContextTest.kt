@@ -1,5 +1,8 @@
 package com.daftmobile.efekt
 
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -12,20 +15,17 @@ class StateContextTest {
         val contextA = Context("A")
         val contextB = Context("B")
         val result = contextA + contextB
-        assertEquals(contextA, result[Context.Key("A")])
-        assertEquals(contextB, result[Context.Key("B")])
+        result[Context.Key("A")] shouldBe contextA
+        result[Context.Key("B")] shouldBe contextB
     }
 
     @Test
     fun testSumOfContextElementsScattersIntoSeparateElements() {
         val contextA = Context("A")
         val contextB = Context("B")
-        assertEquals<Map<StateContext.Key<*>, StateContext.Element>>(
-            expected = mapOf(
-                Context.Key("A") to contextA,
-                Context.Key("B") to contextB,
-            ),
-            actual = (contextA + contextB).scatter()
+        (contextA + contextB).scatter() shouldBe  mapOf(
+            Context.Key("A") to contextA,
+            Context.Key("B") to contextB,
         )
     }
 
@@ -35,7 +35,7 @@ class StateContextTest {
         val contextB = Context("B")
         val contextA2 = Context("A")
         val result = contextA1 + contextB + contextA2
-        assertEquals(contextA2, result[Context.Key("A")])
+        result[Context.Key("A")] shouldBe contextA2
     }
 
     @Test
@@ -44,7 +44,9 @@ class StateContextTest {
         val contextB = Context("B")
         val contextC = Context("C")
         val result = contextA + contextB + contextC - Context.Key("A")
-        assertNull(result.find(Context.Key("A")))
+        result
+            .find(Context.Key("A"))
+            .shouldBeNull()
     }
 
     @Test
@@ -52,18 +54,18 @@ class StateContextTest {
         val contextA = Context("A")
         val contextB = Context("B")
         val result = contextA + contextB - Context.Key("A")
-        assertEquals(contextB, result)
+        result shouldBe contextB
     }
 
     @Test
     fun testMinusRemovesElementFromSingleElementContextOptimizesEmptyContext() {
         val result = Context("A") - Context.Key("A")
-        assertEquals(EmptyStateContext, result)
+        result shouldBe EmptyStateContext
     }
 
     @Test
     fun testMinusAllowsMissingKey() {
         val result = Context("A") - Context.Key("B")
-        assertNotNull(result.find(Context.Key("A")))
+        result.find(Context.Key("A")).shouldNotBeNull()
     }
 }

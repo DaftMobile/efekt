@@ -2,6 +2,8 @@ package com.daftmobile.efekt.coroutines
 
 import com.daftmobile.efekt.Action
 import com.daftmobile.efekt.receiveWith
+import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
@@ -29,13 +31,13 @@ class FlowEffectTest {
                 flowEffect.receiveWith(this.toEffectCoroutineScope(), ::add)
             }
         }
-        assertEquals(listOf(Action("A"), Action("B"), Action("C")), actions)
+        actions shouldBe listOf(Action("A"), Action("B"), Action("C"))
     }
 
     @Test
     fun testJobRegistryContainsTokenWhenEffectHasToken() = runTest {
         val context = this.toEffectCoroutineScope() + jobRegistry
         flowEffectWithToken.receiveWith(context) {}
-        assertNotNull(context.jobRegistry.get("Test token"))
+        context.jobRegistry.get("Test token").shouldNotBeNull()
     }
 }

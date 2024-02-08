@@ -1,5 +1,6 @@
 package com.daftmobile.efekt
 
+import io.kotest.matchers.shouldBe
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -16,6 +17,6 @@ class SequenceEffectTest {
     @Test
     fun testDispatchesYieldedActions() {
         val actions = buildList { effect.receiveWith(dispatch = ::add) }
-        assertEquals(listOf(Action("A"), Action("B"), Action("C")), actions)
+        actions shouldBe listOf(Action("A"), Action("B"), Action("C"))
     }
 }
