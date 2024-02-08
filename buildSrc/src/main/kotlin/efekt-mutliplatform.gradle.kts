@@ -29,7 +29,6 @@ kotlin {
     watchosX64()
     watchosArm64()
     watchosSimulatorArm64()
-    watchosDeviceArm64()
 
     macosArm64()
     macosX64()
@@ -39,17 +38,12 @@ kotlin {
     linuxX64()
     linuxArm64()
 
-    androidNativeArm32()
-    androidNativeArm64()
-
-    androidNativeX86()
-    androidNativeX64()
-
     sourceSets {
 
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation(libs.findLibrary("kotlinx-coroutines-test").get())
+            implementation(libs.findLibrary("kotest-assertions-core").get())
         }
     }
 }
