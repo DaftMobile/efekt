@@ -5,6 +5,7 @@ plugins {
 rootProject.name = "efekt"
 
 include(":efekt-core")
+include(":efekt-datetime")
 
 dependencyResolutionManagement {
     repositories {
