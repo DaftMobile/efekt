@@ -8,5 +8,5 @@ mokkery {
 }
 dependencies {
     commonMainApi(libs.kotlinx.coroutines.core)
-    commonMainApi(libs.turbine)
+    commonTestImplementation(libs.turbine)
 }
