@@ -5,6 +5,7 @@ plugins {
 rootProject.name = "efekt"
 
 include(":efekt-core")
+include(":efekt-data")
 include(":efekt-datetime")
 include(":efekt-test")
 
