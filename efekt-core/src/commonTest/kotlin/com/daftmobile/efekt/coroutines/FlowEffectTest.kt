@@ -8,8 +8,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 
 class FlowEffectTest {
 
@@ -25,12 +23,10 @@ class FlowEffectTest {
     private val jobRegistry = defaultJobRegistry()
 
     @Test
-    fun testDispatchesEmittedActions() {
-        val actions = buildList {
-            runTest {
-                flowEffect.receiveWith(this.toEffectCoroutineScope(), ::add)
-            }
-        }
+    fun testDispatchesEmittedActions() = runTest {
+        val actions = mutableListOf<Action>()
+        flowEffect.receiveWith(this.toEffectCoroutineScope(), actions::add)
+        testScheduler.advanceUntilIdle()
         actions shouldBe listOf(Action("A"), Action("B"), Action("C"))
     }
 
