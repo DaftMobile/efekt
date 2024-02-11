@@ -9,7 +9,7 @@ public interface ReducerScope<T> {
     public fun queue(effect: Effect)
 }
 
-internal fun <T> ReducerScope(
+public fun <T> ReducerScope(
     state: StateProperty<T>,
     context: StateContext = EmptyStateContext,
 ): ReducerScope<T> = ReducerScopeImpl(state, context)
