@@ -37,13 +37,4 @@ kotlin {
 
     linuxX64()
     linuxArm64()
-
-    sourceSets {
-
-        commonTest.dependencies {
-            implementation(kotlin("test"))
-            implementation(libs.findLibrary("kotlinx-coroutines-test").get())
-            implementation(libs.findLibrary("kotest-assertions-core").get())
-        }
-    }
 }

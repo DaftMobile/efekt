@@ -1,7 +1,6 @@
 package com.daftmobile.efekt.datetime
 
 import io.kotest.matchers.shouldBe
-import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -15,7 +14,7 @@ import kotlin.time.Duration.Companion.minutes
 class ContextDateTest {
 
     @Test
-    fun testCurrentDateReturnsLocalDateBasedOnClockAndTimeZone() = runTest {
+    fun testCurrentDateReturnsLocalDateBasedOnClockAndTimeZone() {
         val instant = Instant.fromEpochMilliseconds((3.days - 30.minutes).inWholeMilliseconds)
         val timeZone = TimeZone.of("GMT+1")
         val context = instant.toContextClock() + timeZone.toContextTimeZone()
@@ -23,7 +22,7 @@ class ContextDateTest {
     }
 
     @Test
-    fun testCurrentDateReturnsLocalDateTimeBasedOnClockAndTimeZone() = runTest {
+    fun testCurrentDateReturnsLocalDateTimeBasedOnClockAndTimeZone() {
         val instant = Instant.fromEpochMilliseconds((3.days - 30.minutes).inWholeMilliseconds)
         val timeZone = TimeZone.of("GMT+2")
         val context = instant.toContextClock() + timeZone.toContextTimeZone()
@@ -34,7 +33,7 @@ class ContextDateTest {
     }
 
     @Test
-    fun testCurrentTimeReturnsLocalTimeBasedOnClockAndTimeZone() = runTest {
+    fun testCurrentTimeReturnsLocalTimeBasedOnClockAndTimeZone() {
         val instant = Instant.fromEpochMilliseconds((3.days - 30.minutes).inWholeMilliseconds)
         val timeZone = TimeZone.of("GMT+3")
         val context = instant.toContextClock() + timeZone.toContextTimeZone()
