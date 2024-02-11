@@ -6,6 +6,7 @@ rootProject.name = "efekt"
 
 include(":efekt-core")
 include(":efekt-datetime")
+include(":efekt-test")
 
 dependencyResolutionManagement {
     repositories {
