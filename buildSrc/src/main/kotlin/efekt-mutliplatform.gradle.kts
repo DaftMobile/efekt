@@ -1,3 +1,4 @@
+import dev.mokkery.verify.VerifyMode
 
 plugins {
     kotlin("multiplatform")
@@ -7,6 +8,10 @@ plugins {
 val libs = extensions
     .getByType<VersionCatalogsExtension>()
     .named("libs")
+
+mokkery {
+    defaultVerifyMode.set(VerifyMode.exhaustiveOrder)
+}
 
 kotlin {
     explicitApi()

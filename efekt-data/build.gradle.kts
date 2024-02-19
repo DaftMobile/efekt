@@ -4,10 +4,6 @@ plugins {
     id("efekt-mutliplatform")
 }
 
-mokkery {
-    defaultVerifyMode.set(VerifyMode.exhaustiveOrder)
-}
-
 dependencies {
     commonMainApi(project(":efekt-core"))
     commonTestImplementation(kotlin("test"))
