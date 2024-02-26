@@ -1,6 +1,7 @@
 import dev.mokkery.verify.VerifyMode
 
 plugins {
+    id("efekt-publish")
     id("efekt-mutliplatform")
 }
 
