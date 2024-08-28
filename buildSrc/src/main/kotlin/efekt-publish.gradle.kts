@@ -11,6 +11,10 @@ val dokkaJar by tasks.creating(Jar::class) {
     from(tasks.findByName("dokkaGfm"))
 }
 
+signing {
+    sign(publishing.publications)
+}
+
 publishing {
     val ossrhUsername: String? by project
     val ossrhPassword: String? by project
