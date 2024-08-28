@@ -12,8 +12,8 @@ val dokkaJar by tasks.creating(Jar::class) {
 }
 
 publishing {
-    val ossrhUsername: String? = null
-    val ossrhPassword: String? = null
+    val ossrhUsername: String? by project
+    val ossrhPassword: String? by project
     repositories {
         maven {
             name = "sonatype"
